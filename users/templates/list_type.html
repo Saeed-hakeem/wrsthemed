@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block title   %}
+{% endblock  %}
+
+
+{% block content %}
+
+    <div class="container-fluid " >
+        <div class="card mt-4">
+       <div class="card-header d-flex justify-content-between align-items-center">
+                       <span><i class="fas fa-table"></i>  Type List</span>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <a  href="{% url 'add_type' %}" class="btn btn-primary me-md-2" role="button"  ><i class="fas fa-plus"></i>   Add New</a>
+                          </div>
+                      </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Type Name</th>
+                                            <th>Initials</th>
+                                             <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Type Name</th>
+                                            <th>Initials</th>
+                                             <th>Action</th>
+
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for usertype in usertypes %}
+                                            <td>{{ usertype.type_name }}</td>
+                                            <td>{{ usertype.initials }}</td>
+                                            <td>
+                                            <a href="{% url 'update_type' usertype.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg text-success"></i>
+                    </a>
+                    <form action="{% url 'delete_type' usertype.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+                                            </td>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+    </div>
+
+
+{% endblock  %}
+
+
+

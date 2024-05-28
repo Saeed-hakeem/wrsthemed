@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container-fluid">
+
+    <div class="card mt-5">
+   <div class="card-header d-flex justify-content-between align-items-center">
+                        <strong>Add New Department</strong>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <a  href="{% url 'list_dep' %}" class="btn btn-primary me-md-2" role="button"  ><i class="fas fa-list"></i>   Show List</a>
+                          </div>
+                      </div>
+  <div class="card-body">
+     <form action="/add_dep" method="post" autocomplete="off">
+    {% csrf_token %}
+     <div class="row">
+            <div class="col-md-6">
+                {{form.department_name|as_crispy_field}}
+            </div>
+            <div class="col-md-6">
+                {{form.initials|as_crispy_field}}
+            </div>
+
+        </div>
+    <button type="submit" class="btn btn-success align-items-center justify-content-center">submit</button>
+    </form>
+
+  </div>
+</div>
+    </div>
+
+
+
+{% endblock %}

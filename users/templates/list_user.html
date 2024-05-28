@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+{% block title   %}
+{% endblock  %}
+
+
+{% block content %}
+    <div class="container-fluid">
+    <div class="card mt-5">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+
+                                <span><i class="fas fa-table"></i>  User List</span>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a  href="{% url 'add_user' %}" class="btn btn-primary me-md-2" role="button"  ><i class="fas fa-plus"></i> Add New</a>
+    </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Service Number</th>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Contact</th>
+                                            <th>Email</th>
+                                            <th>Department</th>
+                                            <th>User Type</th>
+                                            <th>Status</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                         <td>{{ user.service_number }}</td>
+                                            <td>{{ user.rank }}</td>
+                                            <td>{{ user.name }}</td>
+                                            <td>{{ user.contact }}</td>
+                                            <td>{{ user.email}}</td>
+                                            <td>{{ user.department }}</td>
+                                            <td>{{ user.usertype }}</td>
+                                            <td>
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+                                  <label class="btn btn-outline-success" for="btn-check-outlined">Active</label>
+                                            </td>
+                                         </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+    </div>
+
+
+{% endblock  %}
+
+
+

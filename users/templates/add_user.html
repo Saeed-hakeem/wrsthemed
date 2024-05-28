@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container-fluid">
+    <div class="card mt-5">
+   <div class="card-header d-flex justify-content-between align-items-center">
+                        <strong>Add New User</strong>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <a  href="{% url 'list_user' %}" class="btn btn-primary me-md-2" role="button"  ><i class="fas fa-list"></i>   Show List</a>
+                          </div>
+                      </div>
+  <div class="card-body">
+   <form action="/add_user" method="post" autocomplete="off">
+    {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                {{form.service_number|as_crispy_field}}
+            </div>
+            <div class="col-md-4">
+                {{form.rank|as_crispy_field}}
+            </div>
+            <div class="col-md-4">
+                {{form.name|as_crispy_field}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{form.contact|as_crispy_field}}
+            </div>
+            <div class="col-md-8">
+                {{form.email|as_crispy_field}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 ">
+                {{form.department|as_crispy_field}}
+            </div>
+            <div class="col-md-3">
+                {{form.usertype|as_crispy_field}}
+            </div>
+            <div class="col-md-6">
+                {{form.password|as_crispy_field}}
+            </div>
+        </div>
+    <button type="submit" class="btn btn-success">submit</button>
+    </form>
+
+  </div>
+</div>
+
+
+    </div>
+
+
+{% endblock %}

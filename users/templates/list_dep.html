@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% block title   %}
+{% endblock  %}
+
+
+{% block content %}
+
+    <div class="container-fluid">
+
+<div class="card mt-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+
+                                <span> <i class="fas fa-table me-1"></i>   Department List</span>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a  href="{% url 'add_dep' %}" class="btn btn-primary me-md-2" role="button"  ><i class="fas fa-plus"></i> Add New</a>
+
+    </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Department Name</th>
+                                            <th>Initials</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for department in departments %}
+                                        <tr>
+
+                                         <td>{{ department.department_name }}</td>
+                                            <td>{{ department.initials }}</td>
+                                             <td>
+                                              <a href="{% url 'update_dep' department.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg text-success"></i>
+                    </a>
+                    <form action="{% url 'delete_dep' department.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                                             </td>
+                                        </tr>
+
+
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+    </div>
+
+{% endblock  %}
+
+
+

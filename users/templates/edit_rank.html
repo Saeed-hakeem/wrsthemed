@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    <div class="container-fluid">
+
+    <div class="card mt-4">
+    <div class="card-header">
+         <i class="fas fa-table"></i>
+       <span>Update Rank</span>
+    </div>
+        <div class="card-body ">
+        <form method="POST" autocomplete="off"   action="/update_rank/{{ rank.id }}/">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+    <label  class="form-label text-black"><b>Rank Name</b></label>
+                <br>
+    <input type="text" name="rank_name" id="id_rank_name" value="{{ rank.rank_name }}"/>
+  </div>
+  <div class="col-md-6 ">
+    <label  class="form-label "><b>Initials</b></label>
+      <br>
+    <input type="text" name="initials" id="id_initials" value="{{ rank.initials }}"/>
+  </div>
+    </div>
+            <br>
+
+
+  <button type="submit" class="btn btn-success">submit</button>
+</form>
+
+    </div>
+
+
+        </div>
+
+
+
+{% endblock %}
