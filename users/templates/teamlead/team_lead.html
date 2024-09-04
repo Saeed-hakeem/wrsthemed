@@ -1,0 +1,166 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}
+    Team lead DashBoard
+{% endblock %}
+
+{% block sidebar %}
+ <div  id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion text-muted" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="{% url 'teamlead' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">TASK RECORDS</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
+                                Task Settings
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="{% url 'task_assignment' %}" >
+                                        Task
+                                    </a>
+
+                                    <a class="nav-link" href="" >
+                                        Task Progress
+                                    </a>
+                                    <a class="nav-link " href="{% url 'view_task' %}" >
+                                        View Task
+                                    </a>
+
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Reports</div>
+                            <!--<a class="nav-link" href="{% url 'projects' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+                                Projects
+                            </a>-->
+                            <a class="nav-link" href={% url 'reports' %}>
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                Reports
+                            </a>
+                             <a class="nav-link" href={% url 'feedback' %}>
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                FeedBack
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        {{ user.serviceNumber }}
+                    </div>
+                </nav>
+            </div>
+
+
+{% endblock %}
+{% block content %}
+                    <main>
+                    <div class="container-fluid px-4">
+                        <div class="alert alert-warning" role="alert">
+ Welcome back Team Lead!
+</div>
+
+                        <div class="row">
+
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">
+                                        <p >TASK</p>
+                                        <span class="number fa-2x" >0</span>
+                                        <div class="icon d-inline float-end">
+                                            <i class="fas fa-list-check fa-3x"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">
+                                        <p>Feed Back</p>
+                                        <span class="number fa-2x" >0</span>
+                                        <div class="icon d-inline float-end">
+                                            <i class="fas fa-comments fa-3x"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">
+                                        <p >Reports</p>
+                                        <span class="number fa-2x" data-val="7">0</span>
+                                        <div class="icon d-inline float-end">
+                                            <i class="fas fa-book fa-3x"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Department Statistics
+                                    </div>
+                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table me-1"></i>
+                                        Task List
+                                    </div>
+                                    <div class="card-body">   <table id="datatablesSimple">
+                                     <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Assigned To</th>
+                <th>Status</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.assigned_to.username }}</td>
+                <td>{{ task.get_status_display }}</td>
+                <td>{{ task.due_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+                                </table></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </main>
+             {% endblock %}
+     {% block footer %}
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Weekly Report System 2024</div>
+                            <div>
+                                <a href="#">Powered  by &amp; Cismic</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                {% endblock %}
+

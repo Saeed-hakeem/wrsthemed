@@ -34,15 +34,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 ">
+            <div class="col-md-2 ">
                 {{form.department|as_crispy_field}}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 {{form.usertype|as_crispy_field}}
             </div>
-            <div class="col-md-6">
-                {{form.password|as_crispy_field}}
+            <div class="col-md-4">
+                 {{form.password|as_crispy_field}}
             </div>
+            <div class="col-md-4">
+                {{form.password|as_crispy_field}}
+                <small><i>"confirm your password":</i></small>
+            </div>
+
         </div>
     <button type="submit" class="btn btn-success">submit</button>
     </form>

@@ -1,0 +1,58 @@
+{% extends "so2/so2.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Team lead DashBoard
+{% endblock %}
+{% block content %}
+
+
+    <div class="container-fluid">
+
+<div class="card mt-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+
+                                <span> <i class="fas fa-table me-1"></i>   Project List</span>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a  href="{% url 'projects' %}" class="btn btn-primary me-md-2" role="button"  ><i class="fas fa-plus"></i> Add Project</a>
+
+    </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Department</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                    <tr>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.description }}</td>
+                        <td>{{ project.department }}</td>
+                        <td>{{ project.created_at }}</td>
+                        <td><a href="" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg text-success"></i>
+                    </a>
+                    <form action="" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+</div>
+{% endblock %}

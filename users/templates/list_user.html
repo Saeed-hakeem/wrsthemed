@@ -24,7 +24,6 @@
                                             <th>Email</th>
                                             <th>Department</th>
                                             <th>User Type</th>
-                                            <th>Status</th>
 
                                         </tr>
                                     </thead>
@@ -39,10 +38,6 @@
                                             <td>{{ user.email}}</td>
                                             <td>{{ user.department }}</td>
                                             <td>{{ user.usertype }}</td>
-                                            <td>
-                                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-                                  <label class="btn btn-outline-success" for="btn-check-outlined">Active</label>
-                                            </td>
                                          </tr>
                                     {% endfor %}
                                     </tbody>

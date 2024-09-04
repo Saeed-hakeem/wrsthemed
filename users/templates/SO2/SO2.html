@@ -1,0 +1,180 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}
+    SO2  DashBoard
+{% endblock %}
+
+{% block sidebar %}
+ <div  id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion text-muted" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="{% url 'so2' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">PROJECT RECORDS</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
+                                Project Settings
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="{% url 'projects' %}" >
+                                        Projects
+                                    </a>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Reports</div>
+
+                            <a class="nav-link" href={% url 'so2_report' %}>
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                Reports
+                            </a>
+                             <a class="nav-link" href={% url 'feedback' %}>
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                FeedBack
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        {{ user.serviceNumber }}
+                    </div>
+                </nav>
+            </div>
+
+
+{% endblock %}
+{% block content %}
+                    <main>
+                    <div class="container-fluid px-4">
+                                         <div class="alert alert-warning  background-image: linear-gradient(to bottom right, palegoldenrod, white, palegoldenrod);" role="alert">
+ Welcome back SO2!
+</div>
+                        <div class="row">
+
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">
+                                        <p >Projects</p>
+                                        <span class="number fa-2x" >0</span>
+                                        <div class="icon d-inline float-end">
+                                            <i class="fas fa-list-check fa-3x"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">
+                                        <p>Feed Back</p>
+                                        <span class="number fa-2x" >0</span>
+                                        <div class="icon d-inline float-end">
+                                            <i class="fas fa-comments fa-3x"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">
+                                        <p >Reports</p>
+                                        <span class="number fa-2x" data-val="7">0</span>
+                                        <div class="icon d-inline float-end">
+                                            <i class="fas fa-book fa-3x"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Departments
+                                    </div>
+    <div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFHzjfQkQ5j7A4qJcutct_GsyulAqCyZZuNstry0NMa3ruV_ne-ea37Zhsig&s" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>SOFTWARE DEPARTMENT</h5>
+        <p>Creation and mainteinance</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQQ9629V8nM9zHBENk8S-W_qghQF9fIjCLx6OvdLNXMPTtByOCGNXYV00dYQ&s" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Production</h5>
+        <p>from the drawing board.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        Project Projections
+                                    </div>
+                                    <div class="card-body">
+                                         <table id="datatablesSimple">
+                                    <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Department</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                    <tr>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.description }}</td>
+                        <td>{{ project.department.name }}</td>
+                        <td>{{ project.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+                                </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </main>
+             {% endblock %}
+

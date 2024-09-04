@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import UserForm, UserTypeForm, DepartmentForm, RankForm
+from .forms import UserForm, UserTypeForm, DepartmentForm, RankForm, TaskAssignmentForm, CustomLoginForm
 from .models import User, UserType, Department, Rank
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login as auth_login
 
 # Create your views here.
 def index(request):
@@ -19,20 +20,14 @@ def index(request):
 
 
 
-def login_user(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/index')
-        else:
-            messages.success(request, " Invalid Credentials. Try again.")
-            return redirect('/login')
-        pass
-    else:
-        return render(request, 'registration/login.html')
+
+""""class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+    authentication_form = CustomLoginForm
+
+    def form_valid(self, form):
+        auth_login(self.request, form.get_user())
+        return redirect('index') """""
 
 
 def add_type(request):
@@ -172,3 +167,16 @@ def update_dep(request, id):
         form.save()
         return redirect("/list_dep")
     return render(request, 'edit_dep.html', {'department': department})
+
+
+def team_lead(request):
+    return render(request, 'teamlead/team_lead.html')
+
+def so2(request):
+    return render(request, 'SO2/so2.html')
+
+def director(request):
+    return render(request, 'director/director.html')
+
+def co(request):
+    return render(request, 'co/co.html')

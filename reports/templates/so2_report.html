@@ -1,0 +1,61 @@
+{% extends "so2/so2.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+    <div class="card">
+        <div class="card-header"> <i class="fas fa-table"></i>  reports</div>
+        <div class="card-body">
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="title">Report Title:</label>
+        <input type="text" name="title" id="title" class="form-control" value="{{ form.title.value }}">
+    </div>
+    <div class="form-group">
+        <label for="content">Content:</label>
+        <textarea name="content" id="content" class="form-control">{{ form.content.value }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="author">Prepared By :</label>
+        <select name="author" id="author" class="form-control">
+            {% for user in form.author.field.queryset %}
+                <option value="{{ user.id }}" {% if user.id == form.author.value %}selected{% endif %}>{{ user.service_number }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <select name="status" id="status" class="form-control">
+            {% for choice in form.status.field.choices %}
+                <option value="{{ choice.0 }}" {% if choice.0 == form.status.value %}selected{% endif %}>{{ choice.1 }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="project">Related Project:</label>
+        <select name="project" id="project" class="form-control">
+            {% for project in form.project.field.queryset %}
+                <option value="{{ project.id }}" {% if project.id == form.project.value %}selected{% endif %}>{{ project.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Save Report</button>
+</form>
+
+
+        </div>
+
+    </div>
+
+
+    </div>
+
+
+
+{% endblock %}

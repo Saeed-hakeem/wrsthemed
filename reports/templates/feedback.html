@@ -1,0 +1,58 @@
+{% extends "teamlead/team_lead.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header"><i class="fas fa-table"></i> Feedback</div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="report">Report:</label>
+                        <select name="report" id="report" class="form-control">
+                            {% for report in form.report.field.queryset %}
+                                <option value="{{ report.id }}" {% if report.id == form.report.value %}selected{% endif %}>{{ report.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="given_by">Given By:</label>
+                        <select name="given_by" id="given_by" class="form-control">
+                            {% for user in form.given_by.field.queryset %}
+                                <option value="{{ user.id }}" {% if user.id == form.given_by.value %}selected{% endif %}>{{ user.service_number }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Feedback Content:</label>
+                    <textarea name="content" id="content" class="form-control">{{ form.content.value }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="action">Action:</label>
+                    <select name="action" id="action" class="form-control">
+                        {% for choice in form.action.field.choices %}
+                            <option value="{{ choice.0 }}" {% if choice.0 == form.action.value %}selected{% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                {% if form.instance.created_at %}
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="datetime-local" name="created_at" id="Date" class="form-control" value="{{ form.instance.created_at }}" disabled>
+                    </div>
+                {% endif %}
+
+                <br>
+                <button type="submit" class="btn btn-primary">Save Feedback</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

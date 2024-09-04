@@ -1,10 +1,11 @@
 from django.urls import path
 from . import views
-import django.contrib.auth.views as auth_views
+#from .views import CustomLoginView
+from django.contrib.auth import views as auth_view
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login/', auth_views.LoginView.as_view(), name='login_user'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    #path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', auth_view.LogoutView.as_view(), name='logout'),
     path('add_type', views.add_type, name='add_type'),
     path('list_type', views.list_type, name='list_type'),
     path('add_dep', views.add_dep, name='add_dep'),
@@ -24,8 +25,7 @@ urlpatterns = [
     path('edit_rank/<int:id>/', views.edit_rank, name='edit_rank'),
     path('edit_dep/<int:id>/', views.edit_dep, name='edit_dep'),
     path('edit_type/<int:id>/', views.edit_type, name='edit_type'),
-    #path('projectLead', views.projectLead, name='projectLead'),
-    #path('prolist', views.prolist, name='prolist'),
-    #path('hod', views.hod, name='hod'),
-    #path('hodlist', views.hodlist, name='hodlist'),
+    #path('register/', views.register, name='register'),
+    path('teamlead/', views.team_lead, name='teamlead'),
+    path('so2/', views.so2, name='so2'),
 ]

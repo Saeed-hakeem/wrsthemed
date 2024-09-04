@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.forms import UserChangeForm
+
 from .models import Department, User, Rank, UserType
 
 class DepartmentAdmin(admin.ModelAdmin):
@@ -6,8 +9,10 @@ class DepartmentAdmin(admin.ModelAdmin):
     search_fields = ['department_name']
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('service_number', 'rank', 'name', 'contact', 'email', 'department', 'usertype', 'password')
-    search_fields = ['service_number', 'rank', 'name', 'contact', 'email', 'department', 'usertype', 'password']
+    form = UserChangeForm
+    model = User
+    list_display = ('service_number', 'rank', 'name', 'contact', 'email', 'department', 'usertype')
+    search_fields = ['service_number', 'name', 'email']
 
 class RankAdmin(admin.ModelAdmin):
     list_display = ('rank_name', 'initials')

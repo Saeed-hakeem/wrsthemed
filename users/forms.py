@@ -1,6 +1,7 @@
-
 from django import forms
-from .models import User, Department, UserType, Rank
+from django.contrib.auth.forms import AuthenticationForm
+from .models import User, Department, UserType, Rank, Task
+
 
 
 class UserForm(forms.ModelForm):
@@ -39,12 +40,30 @@ class UserTypeForm(forms.ModelForm):
   fields = ('type_name', 'initials')
 
 
-class LoginForm(forms.Form):
-    username = forms
-    password = forms.CharField(widget=forms.PasswordInput())
-
-    def clean(self):
-        username = self
 
 
-        fields = ('username', 'password')
+class CustomLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Service Number",
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Service Number'})
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
+    )
+
+    def clean_service_number(self):
+        service_number = self.cleaned_data.get('service_number')
+        if User.objects.filter(service_number=service_number).exists():
+            raise forms.ValidationError("This service number is already in use.")
+        return service_number
+
+
+class TaskAssignmentForm(forms.ModelForm):
+    assigned_members = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=forms.SelectMultiple)
+
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'assigned_members', 'due_date', 'priority']
+        widgets = {
+            'due_date': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD'}),
+        }

@@ -1,0 +1,56 @@
+{% extends "teamlead/team_lead.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+    <div class="card">
+       <div class="card-header d-flex justify-content-between align-items-center">
+
+                                <span> <i class="fas fa-table me-1"></i>  Assign Task </span>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a  href="{% url 'view_task' %}" class="btn btn-primary me-md-2" role="button"  ><i class="fas fa-list"></i> Show list</a>
+
+    </div>
+                            </div>
+        <div class="card-body">
+     <div class="container">
+        <form method="POST" action="/task_assignment">
+            {% csrf_token %}
+           <div class="row">
+            <div class="col-md-4">
+                {{form.title|as_crispy_field}}
+            </div>
+            <div class="col-md-4">
+                {{form.project|as_crispy_field}}
+            </div>
+            <div class="col-md-4">
+                {{form.assigned_to|as_crispy_field}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{form.description|as_crispy_field}}
+            </div>
+            <div class="col-md-3">
+                {{form.status|as_crispy_field}}
+            </div>
+            <div class="col-md-3">
+                {{form.due_date|as_crispy_field}}
+            </div>
+        </div>
+        </form>
+         <button type="submit" class="btn btn-primary" >Create Task</button>
+    </div>
+        </div>
+
+    </div>
+
+
+    </div>
+
+
+
+{% endblock %}

@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
+    'reports',
+    'rest_framework',
     'crispy_forms',
     'crispy_bootstrap5',
 ]
@@ -84,7 +86,7 @@ WSGI_APPLICATION = 'wrsthemed.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "weekly_db",
+        "NAME": "wrs_db",
         "USER": "root",
         "PASSWORD": "",
         "HOST": "127.0.0.1",
@@ -130,13 +132,17 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
-
+AUTH_USER_MODEL = 'users.User'
+AUTHENTICATION_BACKENDS = ['users.backends.UserBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Ensure this backend is included
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/index'
+LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = '/login'
